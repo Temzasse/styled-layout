@@ -1,6 +1,7 @@
 {
   "version": "0.1.0",
   "license": "MIT",
+  "description": "Simple responsive layout components built with React and styled-components",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -34,6 +35,14 @@
   },
   "name": "styled-layout",
   "author": "Teemu Taskula",
+  "repository": "https://github.com/Temzasse/styled-layout",
+  "keywords": [
+    "react",
+    "css-in-js",
+    "styled-components",
+    "layout",
+    "responsive"
+  ],
   "module": "dist/styled-layout.esm.js",
   "devDependencies": {
     "@types/react": "16.9.34",
