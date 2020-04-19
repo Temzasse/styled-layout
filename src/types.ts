@@ -1,4 +1,4 @@
-import { css, DefaultTheme } from 'styled-components';
+import { css, DefaultTheme, StyledComponent } from 'styled-components';
 
 type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any
   ? A
@@ -35,3 +35,7 @@ export type WithMediaProp<T> = T & {
 export type WithTransientMediaProp<T> = T & {
   $media?: Partial<{ [breakpoint in keyof Theme['breakpoints']]: Partial<T> }>;
 };
+
+type NativeDivProps = React.PropsWithoutRef<JSX.IntrinsicElements['div']>;
+type StyledDivProps = React.ComponentProps<StyledComponent<'div', any>>;
+export type BaseProps = NativeDivProps & StyledDivProps;

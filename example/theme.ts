@@ -10,7 +10,6 @@ const baseBreakpoints = {
 
 const breakpoints = {
   ...baseBreakpoints,
-  // Variants
   tabletDown: { max: baseBreakpoints.tablet.max },
   tabletUp: { min: baseBreakpoints.tablet.min },
   desktopDown: { max: baseBreakpoints.desktop.max },

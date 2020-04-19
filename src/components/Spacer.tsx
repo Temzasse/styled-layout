@@ -1,14 +1,18 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { WithMediaProp, WithTransientMediaProp, Theme } from '../types';
 import { getImportant, makeTransientProps } from './utils';
+import {
+  WithMediaProp,
+  WithTransientMediaProp,
+  Theme,
+  BaseProps,
+} from '../types';
+
 
 // Utilize transient props introduced in styled-components v5.1.0
 // -> https://github.com/styled-components/styled-components/releases/tag/v5.1.0
 
-type NativeProps = React.PropsWithoutRef<JSX.IntrinsicElements['div']>;
-
-type Props = NativeProps &
+type Props = BaseProps &
   WithMediaProp<{
     axis?: 'x' | 'y';
     size?: keyof Theme['spacing'];
@@ -41,7 +45,7 @@ const getCSS = (p: ThemedProps, important = false) => {
 };
 
 const getResponsiveCSS = (p: ThemedProps) => {
-  if (!p.$media) return '';
+  if (!p.$media || !p.theme.media) return '';
 
   return Object.entries(p.$media).map(([breakpoint, props]) => {
     const transientProps = makeTransientProps<TransientProps>(ownProps, props);

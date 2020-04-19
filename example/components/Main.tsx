@@ -81,6 +81,7 @@ export default function Main() {
           spacing="large"
           justify="center"
           style={{ width: '100%' }}
+          media={{ phone: { axis: 'y', align: 'center' } }}
         >
           <Card>
             <Stack align="center">
