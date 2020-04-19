@@ -167,30 +167,30 @@ const CustomComponent = styled.div`
 `;
 ```
 
-You might be asking why we are using the exported `media` helper instead of the one we put in the theme. That's a good question.
+You might be asking why we are using the exported `media` helper instead of the one we put in the theme.
 
-The answer is simply: for some reason editor CSS syntax highlighting only works with `media.phone` 😅
+That's a good question.
 
-By using `${media.phone}` instead of `${p => p.theme.media.phone}` we are able to have correct CSS syntax highlighting at least in VSCode.
+For some reason CSS syntax highlighting only works when we are directly using the media helper. So, by using `${media.phone}` instead of `${p => p.theme.media.phone}` the CSS is highlighted correctly (at least in VSCode). However, the CSS autocompletion doesn't seem to work in either case 😅
 
 ## Components
 
 ### `Stack`
 
-| Prop      | Type          | Default      | Note                                           |
-| --------- | ------------- | ------------ | ---------------------------------------------- |
-| `axis`    | `'x'` / `'y'` | `'y'`        |                                                |
-| `spacing` | `string`      | `'default'`  | Based on provider spacing tokens               |
-| `fluid`   | `boolean`     | `false`      | Determines whether the stack items should wrap |
-| `align`   | `string`      | `flex-start` | Use any flexbox `align-items` value            |
-| `justify` | `string`      | `flex-start` | Use any flexbox `justify-content` value        |
+| Prop      | Type          | Default      | Note                                            |
+| --------- | ------------- | ------------ | ----------------------------------------------- |
+| `axis`    | `'x'` / `'y'` | `'y'`        |                                                 |
+| `spacing` | `string`      | `'default'`  | Based on provider spacing tokens.               |
+| `fluid`   | `boolean`     | `false`      | Determines whether the stack items should wrap. |
+| `align`   | `string`      | `flex-start` | Use any flexbox `align-items` value.            |
+| `justify` | `string`      | `flex-start` | Use any flexbox `justify-content` value.        |
 
 ### `Spacer`
 
-| Prop   | Type          | Default     | Note                             |
-| ------ | ------------- | ----------- | -------------------------------- |
-| `axis` | `'x'` / `'y'` | `'y'`       |                                  |
-| `size` | `string`      | `'default'` | Based on provider spacing tokens |
+| Prop   | Type          | Default     | Note                              |
+| ------ | ------------- | ----------- | --------------------------------- |
+| `axis` | `'x'` / `'y'` | `'y'`       |                                   |
+| `size` | `string`      | `'default'` | Based on provider spacing tokens. |
 
 ### `Divider`
 
