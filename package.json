@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.0.0",
   "license": "MIT",
   "description": "Simple responsive layout components built with React and styled-components",
   "main": "dist/index.js",
@@ -16,7 +16,8 @@
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
-    "prepare": "tsdx build"
+    "prepare": "tsdx build",
+    "release": "np"
   },
   "peerDependencies": {
     "react": ">=16",
@@ -32,6 +33,9 @@
     "semi": true,
     "singleQuote": true,
     "trailingComma": "es5"
+  },
+  "np": {
+    "yarn": true
   },
   "name": "styled-layout",
   "author": "Teemu Taskula",
