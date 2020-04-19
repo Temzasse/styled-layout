@@ -10,17 +10,9 @@ type MediaQueryFn = (...args: CSSArgsType) => CSSReturnType;
 
 export type MediaQuery<B extends object> = { [K in keyof B]: MediaQueryFn };
 
-interface BreakpointRange {
-  min: number;
-  max: number;
+export interface Breakpoints {
+  [breakpoint: string]: { min?: number; max?: number };
 }
-
-export type Breakpoints = {
-  phone: BreakpointRange;
-  tablet: BreakpointRange;
-  desktop: BreakpointRange;
-  monitor: BreakpointRange;
-};
 
 export type Theme = DefaultTheme & {
   spacing: { default: string };
