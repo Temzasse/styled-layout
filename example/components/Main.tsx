@@ -124,8 +124,9 @@ const FluidStackWrapper = styled.div`
   border: 1px solid #ccc;
   border-radius: 5px;
   align-self: flex-start;
-  ${p => media.phone`
-    padding: ${p.theme.spacing.xxlarge};
+
+  ${media.phone`
+    padding: ${p => p.theme.spacing.medium};
   `}
 `;
 
