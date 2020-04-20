@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled, { css, CSSProperties } from 'styled-components';
-import { getImportant, makeTransientProps } from './utils';
+import { getImportant, parseProps } from './utils';
 import {
-  WithMediaProp,
+  WithResponsiveProps,
   WithTransientMediaProp,
   Theme,
   BaseProps,
@@ -13,7 +13,7 @@ import {
 // -> https://github.com/styled-components/styled-components/releases/tag/v5.1.0
 
 type Props = BaseProps &
-  WithMediaProp<{
+  WithResponsiveProps<{
     axis?: 'x' | 'y';
     spacing?: keyof Theme['spacing'];
     fluid?: boolean;
@@ -83,8 +83,7 @@ const getResponsiveCSS = (p: ThemedProps) => {
   if (!p.$media || !p.theme.media) return '';
 
   return Object.entries(p.$media).map(([breakpoint, props]) => {
-    const transientProps = makeTransientProps<TransientProps>(ownProps, props);
-    const breakpointCSS = getCSS({ ...p, ...transientProps }, true);
+    const breakpointCSS = getCSS({ ...p, ...props }, true);
     return p.theme.media[breakpoint]`${breakpointCSS}`;
   });
 };
@@ -96,9 +95,7 @@ const StackBase = styled.div<TransientProps>`
 `;
 
 const Stack: React.FC<Props> = ({ children, ...props }) => (
-  <StackBase {...makeTransientProps<TransientProps>(ownProps, props)}>
-    {children}
-  </StackBase>
+  <StackBase {...parseProps(props, ownProps)}>{children}</StackBase>
 );
 
 export default Stack;

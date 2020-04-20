@@ -2,18 +2,18 @@ import { DefaultTheme } from 'styled-components';
 import { createMediaQuery } from '../src';
 
 const baseBreakpoints = {
-  phone: { min: 0, max: 767 },
-  tablet: { min: 768, max: 1023 },
-  desktop: { min: 1024, max: 1279 },
-  monitor: { min: 1280, max: Infinity },
+  sm: { min: 0, max: 767 },
+  md: { min: 768, max: 1023 },
+  lg: { min: 1024, max: 1279 },
+  xl: { min: 1280, max: Infinity },
 };
 
 const breakpoints = {
   ...baseBreakpoints,
-  tabletDown: { max: baseBreakpoints.tablet.max },
-  tabletUp: { min: baseBreakpoints.tablet.min },
-  desktopDown: { max: baseBreakpoints.desktop.max },
-  desktopUp: { min: baseBreakpoints.desktop.min },
+  mdDown: { max: baseBreakpoints.md.max },
+  mdUp: { min: baseBreakpoints.md.min },
+  lgDown: { max: baseBreakpoints.lg.max },
+  lgUp: { min: baseBreakpoints.lg.min },
 };
 
 export const media = createMediaQuery(breakpoints);

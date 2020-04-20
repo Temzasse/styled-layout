@@ -17,7 +17,7 @@ export default function Main() {
           </Box>
         ))}
 
-        <Stack spacing="small">
+        <Stack spacing={{ _: 'small', sm: 'xxlarge' }}>
           <Box bg="bisque">1</Box>
           <Box bg="bisque">2</Box>
           <Spacer size="medium" />
@@ -28,7 +28,7 @@ export default function Main() {
 
         <Title>Horizontal Stack</Title>
 
-        <Stack axis="x" spacing="normal" media={{ phone: { axis: 'y' } }}>
+        <Stack axis="x" spacing="normal">
           {items.map(i => (
             <Box key={i} bg="gold">
               {i}
@@ -38,11 +38,7 @@ export default function Main() {
 
         <Stack axis="x">
           <Box bg="aquamarine">1</Box>
-          <Spacer
-            axis="x"
-            size="large"
-            media={{ phone: { size: 'xxlarge' } }}
-          />
+          <Spacer axis="x" size="large" />
           <Box bg="aquamarine">2</Box>
           <Box bg="aquamarine">3</Box>
           <Spacer axis="x" size="xsmall" />
@@ -77,11 +73,10 @@ export default function Main() {
         <Title>Alignment inside Stack</Title>
 
         <Stack
-          axis="x"
+          axis={{ _: 'x', sm: 'y' }}
           spacing="large"
           justify="center"
           style={{ width: '100%' }}
-          media={{ phone: { axis: 'y', align: 'center' } }}
         >
           <Card>
             <Stack align="center">
@@ -126,7 +121,7 @@ const FluidStackWrapper = styled.div`
   border-radius: 5px;
   align-self: flex-start;
 
-  ${media.phone`
+  ${media.sm`
     padding: ${p => p.theme.spacing.medium};
   `}
 `;

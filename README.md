@@ -72,8 +72,8 @@ import styled from 'styled-components';
 import { Stack, Spacer } from 'styled-layout';
 
 const BasicStack = () => (
-  <Stack>
-    <h1>Basic stack</h1>
+  <Stack justify="center">
+    <p>Basic stack</p>
     <div>Item 1</div>
     <div>Item 2</div>
 
@@ -93,7 +93,7 @@ You can also take a look at the [example](example/components/Main.tsx) folder fo
 
 ## Media queries
 
-Start by defining the breakpoints that are part of your design system. The name of the each breakpoint is totally up to you to decide - they can be eg. _phone|tablet|desktop|monitor_ or if you fancy more Bootstrap like names _xs|sm|md|lg_.
+Start by defining the breakpoints that are part of your design system. The name of the each breakpoint is totally up to you to decide - they can be eg. _phone|tablet|desktop|monitor_ or if you fancy more Bootstrap like names _sm|md|lg|xl_.
 
 ```js
 const breakpoints = {
@@ -140,14 +140,14 @@ export const theme: DefaultTheme = {
 };
 ```
 
-This will enable the `media` prop for any layout component in styled-layout which allows you to define breakpoint specific props.
+This will enable responsive props for any layout component in styled-layout. The default value in the responsive prop object is represented by `_` key and the other fields come from the breakpoints that were added to the theme.
 
 ```jsx
 import { Stack, Spacer } from 'styled-layout';
 
-<Stack axis="x" media={{ phone: { axis: 'y' } }}>
+<Stack axis={{ _: 'x', phone: 'y' }}>
   <h1>Responsive props</h1>
-  <Spacer size="large" media={{ phone: { size: 'normal' } }} />
+  <Spacer size={{ _: 'large', tablet: 'normal' }} />
   <p>No need to add your own media queries 🎉</p>
 </Stack>;
 ```

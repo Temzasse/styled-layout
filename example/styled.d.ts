@@ -3,15 +3,15 @@ import { MediaQuery } from '../src/types';
 
 declare module 'styled-components' {
   interface Breakpoints {
-    phone: { min: number; max: number };
-    tablet: { min: number; max: number };
-    desktop: { min: number; max: number };
-    monitor: { min: number; max: number };
+    sm: { min: number; max: number };
+    md: { min: number; max: number };
+    lg: { min: number; max: number };
+    xl: { min: number; max: number };
     // Variants
-    tabletDown: { max: number };
-    tabletUp: { min: number };
-    desktopDown: { max: number };
-    desktopUp: { min: number };
+    mdDown: { max: number };
+    mdUp: { min: number };
+    lgDown: { max: number };
+    lgUp: { min: number };
   }
 
   export interface DefaultTheme {

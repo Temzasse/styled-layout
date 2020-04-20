@@ -20,12 +20,24 @@ export type Theme = DefaultTheme & {
   media: MediaQuery<any>;
 };
 
-export type WithMediaProp<T> = T & {
-  media?: Partial<{ [breakpoint in keyof Theme['breakpoints']]: Partial<T> }>;
+export type WithResponsiveProps<T extends object> = {
+  [P in keyof T]:
+    | T[P]
+    | Partial<
+        {
+          [breakpoint in keyof Theme['breakpoints']]: T[P];
+        } & {
+          _: T[P];
+        }
+      >;
 };
 
 export type WithTransientMediaProp<T> = T & {
-  $media?: Partial<{ [breakpoint in keyof Theme['breakpoints']]: Partial<T> }>;
+  $media?: Partial<
+    {
+      [breakpoint in keyof Theme['breakpoints']]: Partial<T>;
+    }
+  >;
 };
 
 type NativeDivProps = React.PropsWithoutRef<JSX.IntrinsicElements['div']>;
