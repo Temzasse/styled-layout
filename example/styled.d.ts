@@ -15,7 +15,16 @@ declare module 'styled-components' {
   }
 
   export interface DefaultTheme {
+    colors: {
+      divider: string;
+      'grey-10': string;
+      'grey-30': string;
+      'grey-50': string;
+      'grey-70': string;
+      'grey-90': string;
+    };
     spacing: {
+      none: string;
       xxsmall: string;
       xsmall: string;
       small: string;

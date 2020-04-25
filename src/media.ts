@@ -33,9 +33,7 @@ export function createMediaQuery<T extends Breakpoints>(breakpoints: T) {
         }
       } else {
         if (min) {
-          const upKey = `${key}Up` as keyof T;
-
-          acc[upKey] = (template, ...args) => css`
+          acc[key] = (template, ...args) => css`
             @media screen and (min-width: ${em(min)}) {
               ${css(template, ...args)}
             }
@@ -43,8 +41,7 @@ export function createMediaQuery<T extends Breakpoints>(breakpoints: T) {
         }
 
         if (max) {
-          const downKey = `${key}Down` as keyof T;
-          acc[downKey] = (template, ...args) => css`
+          acc[key] = (template, ...args) => css`
             @media screen and (max-width: ${em(max)}) {
               ${css(template, ...args)}
             }

@@ -27,14 +27,16 @@ type ThemedProps = TransientProps & { theme: Theme };
 const ownProps = ['axis', 'size', 'media'];
 
 const hspacer = (p: ThemedProps, i: string) => css`
-  width: ${p.theme.spacing[p.$size || 'default']};
+  width: ${getSpacing(p)};
   height: 0 ${i};
 `;
 
 const vspacer = (p: ThemedProps, i: string) => css`
-  height: ${p.theme.spacing[p.$size || 'default']} ${i};
+  height: ${getSpacing(p)} ${i};
   width: 0 ${i};
 `;
+
+const getSpacing = (p: ThemedProps) => p.theme.spacing[p.$size || 'default'];
 
 const getCSS = (p: ThemedProps, important = false) => {
   const i = getImportant(important);
@@ -45,7 +47,6 @@ const getCSS = (p: ThemedProps, important = false) => {
 
 const getResponsiveCSS = (p: ThemedProps) => {
   if (!p.$media || !p.theme.media) return '';
-
   return Object.entries(p.$media).map(([breakpoint, props]) => {
     const breakpointCSS = getCSS({ ...p, ...props }, true);
     return p.theme.media[breakpoint]`${breakpointCSS}`;

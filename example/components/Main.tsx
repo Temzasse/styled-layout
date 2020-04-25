@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Stack, Spacer } from '../../src';
+import { Stack, Spacer, Divider } from '../../src';
 import { media } from '../theme';
 
 export default function Main() {
@@ -94,6 +94,25 @@ export default function Main() {
             </Stack>
           </Card>
         </Stack>
+
+        <Spacer size="xxlarge" />
+
+        <Title>Dividers</Title>
+
+        <Stack dividers>
+          <Box bg="turquoise">1</Box>
+          <Box bg="turquoise">2</Box>
+          <Divider size="large" />
+          <Box bg="turquoise">3</Box>
+        </Stack>
+
+        <Divider size="large" color="grey-90" />
+
+        <Stack axis={{ _: 'x', mdDown: 'y' }} dividers="skyblue">
+          <Box bg="powderblue">1 responsive</Box>
+          <Box bg="powderblue">2 responsive</Box>
+          <Box bg="powderblue">3 responsive</Box>
+        </Stack>
       </Stack>
     </Wrapper>
   );
@@ -140,8 +159,9 @@ const Title = styled.h1`
 `;
 
 const Box = styled.div<{ bg: string }>`
-  width: ${BOX_SIZE}px;
-  height: ${BOX_SIZE}px;
+  min-width: ${BOX_SIZE}px;
+  min-height: ${BOX_SIZE}px;
+  padding: 8px;
   border-radius: 4px;
   display: flex;
   align-items: center;

@@ -19,7 +19,16 @@ const breakpoints = {
 export const media = createMediaQuery(breakpoints);
 
 export const theme: DefaultTheme = {
+  colors: {
+    divider: '#dddddd', // default for dividers
+    'grey-10': '#f5f5f5', // Add room for in-between grey colors
+    'grey-30': '#eeeeee',
+    'grey-50': '#dddddd',
+    'grey-70': '#888888',
+    'grey-90': '#444444',
+  },
   spacing: {
+    none: '0px',
     xxsmall: '2px',
     xsmall: '4px',
     small: '8px',

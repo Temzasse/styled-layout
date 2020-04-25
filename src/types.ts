@@ -16,6 +16,7 @@ export interface Breakpoints {
 
 export type Theme = DefaultTheme & {
   spacing: { default: string };
+  colors: { divider: string };
   breakpoints: Breakpoints;
   media: MediaQuery<any>;
 };
