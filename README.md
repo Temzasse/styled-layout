@@ -1,18 +1,41 @@
 <div align="center" >
   <br/>
   <br/>
-  <strong>💠 Styled Layout</strong>
+  <h1>💠 Styled Layout</h1>
+  &middot;
+  <i>Simple responsive layout components</i>
+  &middot;
   <br/>
-  Simple responsive layout components.
+  <br/>
+  <img alt="npm version" src="https://img.shields.io/npm/v/styled-layout?style=for-the-badge">
+  <img alt="npm license" src="https://img.shields.io/npm/l/styled-layout?style=for-the-badge">
   <br/>
   <br/>
 </div>
 
-<hr />
-
 ## Motivation
 
-TODO.
+### The problem
+
+There are many approaches to handling layout in todays user interfaces on the Web. We have come from using floats and clearfixes to flexbox and grids in CSS to achieve fluid and flexible layouts that are responsive across various device sizes.
+
+The rise of design systems has brought forth the shortcomings of the layout approaches we have been using so far. For example the most common way to create white space between UI components is to attach margins directly to components via class names. This approach is far from perfect and has multiple issues:
+
+1. Changing the position of components is hard since it requires moving the attached margin to another component
+2. How do you decide which component should have the spacing attached to it? (margin-left or margin-right?)
+3. It's impossible to know what the spacing is just by looking at the render method - instead you have to peak in the CSS level to know where the margins are attached.
+4. Components are too context-aware and thus not properly reusable
+
+### The solution
+
+When you shift your thinking away from attaching spacing directly to components to treating layout and spacing inside your UI as components themselves you open the door for a whole new world of layout management. By using layout components, such as `Stack` or `Spacer`, your move the higher level responsibility of handling the layout to a separate component while still being able to have lower level control over the spacing between components. In this way you are able to design your other components in a reusable manner without having to think about the context they appear in and the white space around them.
+
+### Inspirational resources
+
+- [Margin considered harmful](https://mxstbr.com/thoughts/margin)
+- [Layout-isolated components](https://visly.app/blog/layout-isolated-components)
+- [Braid Design System | Layout](https://seek-oss.github.io/braid-design-system/foundations/layout)
+- [Every Layout | Stack](https://every-layout.dev/layouts/stack/)
 
 ## Getting started
 
@@ -73,7 +96,7 @@ import styled from 'styled-components';
 import { Stack, Spacer } from 'styled-layout';
 
 const Component = () => (
-  <Stack justify="center">
+  <Stack>
     <p>Basic stack</p>
     <div>Item 1</div>
     <div>Item 2</div>
@@ -111,11 +134,12 @@ const Component = () => (
 );
 ```
 
-You can control the divider color by defining a color called `divider` in your theme under `colors` - otherwise the default color for the divider line is `#ddd`. However, it is quite common to have a need for more color options for your dividers which is why you can easily use any color by defining any number of colors in your theme and referencing them in the divider's `color` prop.
+You can control the divider color by defining a color called `divider` in your theme under `colors` (otherwise the default color for the divider line is `#ddd`). However, it is quite common that you need more color options for your dividers which is why you can easily use any color by adding more colors to your theme and referencing them in the divider's `color` prop.
 
 ```jsx
 // theme.ts
 import { DefaultTheme } from 'styled-components';
+
 export const theme: DefaultTheme = {
   colors: {
     primary: 'tomato',
@@ -131,7 +155,6 @@ export const theme: DefaultTheme = {
 
 // component.tsx
 import React from 'react';
-import styled from 'styled-components';
 import { Stack } from 'styled-layout';
 
 const Component = () => (
@@ -171,7 +194,7 @@ const Component = () => (
 
 Media queries are commonly used to create responsive styles for components. In most cases you don't need to write media queries by yourself when using styled-layout but instead you can utilize a more ergonomic way of defining responsive styles: responsive props. You might have seen these kind of responsive props in the wild where the props are passed as an array, eg. in [styled-system](https://styled-system.com/responsive-styles/). Instead of using the array syntax for responsive props styled-layout uses an alternative [object syntax](https://styled-system.com/responsive-styles/#using-objects).
 
- Start by defining the breakpoints that are part of your design system. The name of the each breakpoint is totally up to you to decide - they can be eg. _phone|tablet|desktop|monitor_ or if you fancy more Bootstrap like names _sm|md|lg|xl_.
+Start by defining the breakpoints that are part of your design system. The name of the each breakpoint is totally up to you to decide - they can be eg. _phone | tablet | desktop | monitor_ or if you fancy more Bootstrap like names _sm | md | lg | xl_.
 
 ```js
 const breakpoints = {
@@ -216,7 +239,7 @@ export const theme: DefaultTheme = {
 };
 ```
 
-This will enable responsive props for *all* components in styled-layout. The default value in the responsive prop object is represented by `_` key and the other fields come from the breakpoints that were added to the theme.
+This will enable responsive props for _all_ components in styled-layout. The default value in the responsive prop object is represented by `_` key and the other fields come from the breakpoints that were added to the theme.
 
 ```jsx
 import { Stack, Spacer } from 'styled-layout';
