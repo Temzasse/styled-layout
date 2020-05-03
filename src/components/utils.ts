@@ -3,10 +3,9 @@ export const getImportant = (i: boolean) => (i ? '!important' : '');
 const transient = (x: string) => `$${x}`;
 
 export function parseProps<T extends object>(props: T, ownProps: string[]) {
-  return Object.entries(props)
-    .filter(([k]) => ownProps.includes(k))
-    .reduce(
-      (acc, [propKey, propValue]) => {
+  return Object.entries(props).reduce(
+    (acc, [propKey, propValue]) => {
+      if (ownProps.includes(propKey)) {
         const transientPropKey = transient(propKey);
 
         if (typeof propValue === 'object' && propValue !== null) {
@@ -25,9 +24,11 @@ export function parseProps<T extends object>(props: T, ownProps: string[]) {
         } else {
           acc[transientPropKey] = propValue;
         }
-
-        return acc;
-      },
-      { $media: {} } as any // TODO: fix type
-    );
+      } else {
+        acc[propKey] = propValue;
+      }
+      return acc;
+    },
+    { $media: {} } as any // TODO: fix type
+  );
 }
