@@ -1,5 +1,5 @@
 {
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "MIT",
   "description": "Simple responsive layout components built with React and styled-components",
   "main": "dist/index.js",
