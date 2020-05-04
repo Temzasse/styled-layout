@@ -17,7 +17,7 @@ type Props = BaseProps &
     axis?: 'x' | 'y';
     spacing?: keyof Theme['spacing'];
     fluid?: boolean;
-    dividers?: boolean | string;
+    dividers?: boolean | keyof Theme['colors'];
     align?: CSSProperties['alignItems'];
     justify?: CSSProperties['justifyContent'];
   }>;
@@ -26,7 +26,7 @@ type TransientProps = WithTransientMediaProp<{
   $axis?: 'x' | 'y';
   $spacing?: keyof Theme['spacing'];
   $fluid?: boolean;
-  $dividers?: boolean | string;
+  $dividers?: boolean | keyof Theme['colors'];
   $align?: CSSProperties['alignItems'];
   $justify?: CSSProperties['justifyContent'];
 }>;
@@ -115,8 +115,12 @@ const getSpacing = (p: ThemedProps) =>
   `calc(${p.theme.spacing[p.$spacing || 'default']} * ${p.$dividers ? 2 : 1})`;
 
 const getDividerColor = (p: ThemedProps) => {
-  if (typeof p.$dividers === 'string') {
-    return p.$dividers;
+  if (
+    typeof p.$dividers === 'string' &&
+    p.theme.colors &&
+    p.theme.colors[p.$dividers]
+  ) {
+    return p.theme.colors[p.$dividers];
   } else if (p.theme.colors && p.theme.colors.divider) {
     return p.theme.colors.divider;
   }
