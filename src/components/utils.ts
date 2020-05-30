@@ -32,3 +32,15 @@ export function parseProps<T extends object>(props: T, ownProps: string[]) {
     { $media: {} } as any // TODO: fix type
   );
 }
+
+// TODO: fix types
+export function getResponsiveCSS(
+  parsedProps: any,
+  getCSS: (p: any, b?: boolean) => any
+) {
+  if (!parsedProps.$media || !parsedProps.theme.media) return '';
+  return Object.entries(parsedProps.$media).map(([breakpoint, props]: any) => {
+    const breakpointCSS = getCSS({ ...parsedProps, ...props }, true); // true for adding !important
+    return parsedProps.theme.media[breakpoint]`${breakpointCSS}`;
+  });
+}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { parseProps } from './utils';
+import { parseProps, getResponsiveCSS } from './utils';
 import {
   WithResponsiveProps,
   WithTransientMediaProp,
@@ -43,18 +43,10 @@ const getDividerColor = (p: ThemedProps) => {
 
 const getCSS = (p: ThemedProps) => hdivider(p);
 
-const getResponsiveCSS = (p: ThemedProps) => {
-  if (!p.$media || !p.theme.media) return '';
-  return Object.entries(p.$media).map(([breakpoint, props]) => {
-    const breakpointCSS = getCSS({ ...p, ...props });
-    return p.theme.media[breakpoint]`${breakpointCSS}`;
-  });
-};
-
 const DividerBase = styled.div.attrs({ 'data-spacer': 'true' })<TransientProps>`
   flex-shrink: 0;
   ${getCSS}
-  ${getResponsiveCSS}
+  ${p => getResponsiveCSS(p, getCSS)}
 `;
 
 const Divider: React.FC<Props> = ({ children, ...props }) => (

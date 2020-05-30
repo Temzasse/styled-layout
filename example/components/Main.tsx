@@ -28,7 +28,7 @@ export default function Main() {
 
         <Title>Horizontal Stack</Title>
 
-        <Stack axis="x" spacing="normal">
+        <Stack axis="x" spacing="normal" fluid={{ _: false, sm: true }}>
           {items.map(i => (
             <Box key={i} bg="gold">
               {i}
@@ -72,12 +72,7 @@ export default function Main() {
 
         <Title>Alignment inside Stack</Title>
 
-        <Stack
-          axis={{ _: 'x', sm: 'y' }}
-          spacing="large"
-          justify="center"
-          style={{ width: '100%' }}
-        >
+        <Stack axis={{ _: 'x', sm: 'y' }} spacing="large">
           <Card>
             <Stack align="center">
               <Circle />

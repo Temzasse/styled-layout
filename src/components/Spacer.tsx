@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { getImportant, parseProps } from './utils';
+import { getImportant, parseProps, getResponsiveCSS } from './utils';
 import {
   WithResponsiveProps,
   WithTransientMediaProp,
@@ -45,18 +45,10 @@ const getCSS = (p: ThemedProps, important = false) => {
   return '';
 };
 
-const getResponsiveCSS = (p: ThemedProps) => {
-  if (!p.$media || !p.theme.media) return '';
-  return Object.entries(p.$media).map(([breakpoint, props]) => {
-    const breakpointCSS = getCSS({ ...p, ...props }, true);
-    return p.theme.media[breakpoint]`${breakpointCSS}`;
-  });
-};
-
 const SpacerBase = styled.div.attrs({ 'data-spacer': 'true' })<TransientProps>`
   flex-shrink: 0;
   ${getCSS}
-  ${getResponsiveCSS}
+  ${p => getResponsiveCSS(p, getCSS)}
 `;
 
 const Spacer: React.FC<Props> = ({ children, ...props }) => (

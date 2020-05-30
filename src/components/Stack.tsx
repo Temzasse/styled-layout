@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css, CSSProperties } from 'styled-components';
-import { getImportant, parseProps } from './utils';
+import { parseProps, getResponsiveCSS } from './utils';
 import {
   WithResponsiveProps,
   WithTransientMediaProp,
@@ -44,6 +44,10 @@ const ownProps = [
 ];
 
 const hdividers = (p: ThemedProps) => css`
+  & > * {
+    position: relative;
+  }
+
   & > *:not([data-spacer]) + *:not([data-spacer])::before {
     content: '';
     position: absolute;
@@ -57,6 +61,10 @@ const hdividers = (p: ThemedProps) => css`
 `;
 
 const vdividers = (p: ThemedProps) => css`
+  & > * {
+    position: relative;
+  }
+
   & > *:not([data-spacer]) + *:not([data-spacer])::before {
     content: '';
     position: absolute;
@@ -69,44 +77,29 @@ const vdividers = (p: ThemedProps) => css`
   }
 `;
 
-const vstack = (p: ThemedProps, i: string) => css`
-  flex-direction: column ${i};
-
-  & > * {
-    margin: 0 ${i};
-    position: relative;
-  }
-
+const vstack = (p: ThemedProps) => css`
+  flex-direction: column;
   & > *:not([data-spacer]) + *:not([data-spacer]) {
-    margin-top: ${getSpacing(p)} ${i};
+    margin: ${getSpacing(p)} 0 0 0;
   }
-
   ${p.$dividers && hdividers(p)}
 `;
 
-const fluid = (p: ThemedProps, i: string) => css`
-  flex-wrap: wrap ${i};
-  margin: calc(${getSpacing(p)} / 2 * -1) ${i};
-
+const fluid = (p: ThemedProps) => css`
+  flex-wrap: wrap;
+  margin: calc(${getSpacing(p)} / 2 * -1);
   & > * {
     margin: calc(${getSpacing(p)} / 2) !important;
   }
 `;
 
-const hstack = (p: ThemedProps, i: string) => css`
-  flex-direction: row ${i};
-
-  & > * {
-    margin: 0 ${i};
-    position: relative;
-  }
-
+const hstack = (p: ThemedProps) => css`
+  flex-direction: row;
   & > *:not([data-spacer]) + *:not([data-spacer]) {
-    margin-left: ${getSpacing(p)} ${i};
+    margin: 0 0 0 ${getSpacing(p)};
   }
-
   ${p.$dividers && vdividers(p)}
-  ${p.$fluid && fluid(p, i)}
+  ${p.$fluid && fluid(p)}
 `;
 
 // Double the spacing if dividers are used so that the space is correct on both
@@ -127,28 +120,17 @@ const getDividerColor = (p: ThemedProps) => {
   return '#ddd';
 };
 
-const getCSS = (p: ThemedProps, important = false) => {
-  const i = getImportant(important);
-  return css`
-    align-items: ${p.$align || 'flex-start'} ${i};
-    justify-content: ${p.$justify || 'flex-start'} ${i};
-    ${p.$axis === 'x' && hstack(p, i)}
-    ${(!p.$axis || p.$axis === 'y') && vstack(p, i)}
-  `;
-};
-
-const getResponsiveCSS = (p: ThemedProps) => {
-  if (!p.$media || !p.theme.media) return '';
-  return Object.entries(p.$media).map(([breakpoint, props]) => {
-    const breakpointCSS = getCSS({ ...p, ...props }, true);
-    return p.theme.media[breakpoint]`${breakpointCSS}`;
-  });
-};
+const getCSS = (p: ThemedProps) => [
+  p.$align && `align-items: ${p.$align};`,
+  p.$justify && `justify-content: ${p.$justify};`,
+  p.$axis === 'x' && hstack(p),
+  (!p.$axis || p.$axis === 'y') && vstack(p),
+];
 
 const StackBase = styled.div<TransientProps>`
   display: flex;
   ${getCSS}
-  ${getResponsiveCSS}
+  ${p => getResponsiveCSS(p, getCSS)}
 `;
 
 const Stack: React.FC<Props> = ({ children, ...props }) => (
