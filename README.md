@@ -101,7 +101,7 @@ const Component = () => (
     <div>Item 1</div>
     <div>Item 2</div>
 
-    <Spacer size="large">
+    <Spacer size="large" />
 
     <Stack axis="x" spacing="small">
       <div>Item 3</div>
