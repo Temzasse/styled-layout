@@ -14,7 +14,7 @@ export function parseProps<T extends object>(props: T, ownProps: string[]) {
               // `_` represents the prop default value in responsive obj format
               if (key === '_') {
                 acc[transientPropKey] = value;
-              } else if (!acc[key]) {
+              } else if (!acc.$media[key]) {
                 acc.$media[key] = { [transientPropKey]: value };
               } else {
                 acc.$media[key][transientPropKey] = value;

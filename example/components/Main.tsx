@@ -103,7 +103,11 @@ export default function Main() {
 
         <Divider size="large" color="grey-90" />
 
-        <Stack axis={{ _: 'x', mdDown: 'y' }} dividers="grey-50">
+        <Stack
+          axis={{ _: 'x', mdDown: 'y' }}
+          spacing={{ _: 'large', mdDown: 'small' }}
+          dividers="grey-50"
+        >
           <Box bg="powderblue">1 responsive</Box>
           <Box bg="powderblue">2 responsive</Box>
           <Box bg="powderblue">3 responsive</Box>
