@@ -104,9 +104,15 @@ export default function Main() {
         <Divider size="large" color="grey-90" />
 
         <Stack
-          axis={{ _: 'x', mdDown: 'y' }}
+          axis={{ _: 'x', sm: 'y', md: 'x', lgUp: 'y', xl: 'x' }}
+          align="center"
+          justify={{
+            _: 'space-between',
+            sm: 'flex-start',
+            lgDown: 'space-around',
+            xl: 'flex-end',
+          }}
           spacing={{ _: 'large', mdDown: 'small' }}
-          dividers="grey-50"
         >
           <Box bg="powderblue">1 responsive</Box>
           <Box bg="powderblue">2 responsive</Box>
